@@ -57,12 +57,60 @@ const getFormateDate = function (time) {
   return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
 }
 
+
+//生成租期时长
+const generaRentLengthArray = function() {
+  let rentLengthArray = []
+  for (let i = 1; i <= 24; i++) {
+    rentLengthArray.push(i)
+  }
+  return rentLengthArray;
+}
+
+//生成租期时长
+const generaPayDayArray = function () {
+  let payDayArray = []
+  for (let i = 1; i <= 31; i++) {
+    payDayArray.push(i)
+  }
+  return payDayArray;
+}
+
+const getNextMonth =  function (date, length) {
+  let yy = date.getFullYear()
+  let mm = date.getMonth()
+  let dd = date.getDate()
+
+  let nm = 0//目标月份
+  nm = mm + length
+  let nd = 0//目标天数
+  if (monthDay(yy, nm + 1) < dd) {
+    nd = monthDay(yy, nm + 1)
+  } else {
+    nd = dd - 1
+  }
+  date.setDate(1)
+  date.setMonth(nm)
+  date.setDate(nd)
+  return date
+}
+
+const monthDay =  function (year, month) {
+  month = parseInt(month, 10);
+  var d = new Date(year, month, 0);  //这个是都可以兼容的
+  var date = new Date(year + "/" + month + "/0")   //IE浏览器可以获取天数，谷歌浏览器会返回NaN
+  return d.getDate();
+}
+
 module.exports = {
   formatTime: formatTime,
   getMyUserId: getMyUserId,
   saveMyUserId: saveMyUserId,
   wxGet: wxGet,
   getFormateDate: getFormateDate,
+  generaRentLengthArray,
+  generaPayDayArray,
+  getNextMonth,
 }
 
 

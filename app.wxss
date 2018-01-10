@@ -87,7 +87,6 @@ text.font-list-item{
 text.font-list-item-gray{
   font-size:24rpx;
   color:rgba(136,136,136,1);
-  line-height:33rpx;
 }
 
 text.font-item-gray30{

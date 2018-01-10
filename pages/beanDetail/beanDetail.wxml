@@ -1,6 +1,6 @@
 <!--pages/beanDetail/beanDetail.wxml-->
 <view class='title-wrapper'>
-  <text class='title'>都市名园D栋26G</text>
+  <text class='title'>{{address}}</text>
 </view>
 
 <!--租房详情  -->
@@ -139,32 +139,32 @@
 <view class='item-wrapper' wx:if='{{type==="outdate_detail"}}'>
   <view class='item'>
     <text class='font-item-gray30'>逾期金额</text>
-    <text class='font-red-money'>4500</text>
+    <text class='font-red-money'>{{outdateDetail.rent}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>逾期时长</text>
-    <text class='font-item-red30'>9天</text>
+    <text class='font-item-red30'>{{outdateDetail.overdueNum}}天</text>
   </view>
   
   <view class='line'></view>
   <view class='item'>
     <text class='font-item-gray30'>租客姓名</text>
-    <text class='font-item-gray30'>王大雷</text>
+    <text class='font-item-gray30'>{{outdateDetail.name}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>手机号码</text>
-    <text class='font-item-gray30'>135 0874 9762</text>
+    <text class='font-item-gray30'>{{outdateDetail.phone}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交租日期</text>
-    <text class='font-item-gray30'>5号</text>
+    <text class='font-item-gray30'>{{outdateDetail.pay_time}}号</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>每月租金</text>
-    <text class='font-item-gray30'>4500元</text>
+    <text class='font-item-gray30'>{{outdateDetail.rent}}元</text>
   </view>
 </view>

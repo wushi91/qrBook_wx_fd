@@ -21,6 +21,11 @@ const get_unused_book_url = host + '/rentBook/house/findIdleHouse.do'
 //逾期（账本）
 const get_outdate_book_url = host + '/rentBook/book/selectOverdue.do'
 
+//租客相关
+const to_add_renter_url = host + '/rentBook/book/addBook.do'
+const get_renter_detail_url = host + '/rentBook/book/detail.do'
+const to_edit_renter_url = host + '/rentBook/update/updateTenantInfo.do'
+const to_delete_renter_url =host + '/rentBook/checkOut/status.do'
 
 //
 const to_add_room_url =  host + '/rentBook/house/addHousing.do'
@@ -92,6 +97,30 @@ const requestToAddRoom = function (user_id, province, city, address,code200, err
   util.wxGet(to_add_room_url, data, code200, error)
 }
 
+//添加租客，其实就是账本
+const requestToAddRenter = function (user_id, hid, renterDetail, code200, error) {
+  let data = {
+    user_id: user_id,
+    hid: hid,//房源编号
+    name: renterDetail.renterName,
+    phone: renterDetail.renterPhone,
+    start_time: renterDetail.rentStartDate,//起租日期
+    end_time: renterDetail.rentOverDate,//截止日期
+    rent_month: renterDetail.rentLength,//租期(租凭月数)
+    pay_type: renterDetail.rentPayWay,//交租方式
+    pay_time: renterDetail.rentPayDate,//交租日期
+    security_deposit: renterDetail.yaJinMoney,//房屋押金
+    rent: renterDetail.rentMoney,//租金
+  }
+  util.wxGet(to_add_renter_url, data, code200, error)
+}
+
+const requestGetRenterDetail = function (user_id, bookId, code200, error) {
+  let data = {
+    id: bookId,
+  }
+  util.wxGet(get_renter_detail_url, data, code200, error)
+}
 
 
 
@@ -105,4 +134,6 @@ module.exports = {
   requestBookUnusedList,
   requestBookOutdateList,
   requestToAddRoom,
+  requestToAddRenter,
+  requestGetRenterDetail,
 }

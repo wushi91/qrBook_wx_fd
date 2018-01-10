@@ -1,4 +1,8 @@
 // pages/beanDetail/beanDetail.js
+const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
+
+
 Page({
 
   /**
@@ -11,14 +15,36 @@ Page({
       { rent_detail: '收租详情' },
       { get_cash_detail: '提现详情' },
       { outdate_detail: '逾期详情' },],
-    type:'outdate_detail'
+    type:'outdate_detail',
+    address:'',
+    outdateDetail:null,
   },
 
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      type: options.type,
+    })
+
+
+    if (options.type ==='outdate_detail'){
+      let outdateDetail = {}
+      
+      outdateDetail.overdueNum = options.overdueNum
+      outdateDetail.name = options.name
+      outdateDetail.phone = options.phone
+      outdateDetail.pay_time = options.pay_time
+      outdateDetail.rent = options.rent
+
+      console.log(options)
+      this.setData({
+        address : options.address,
+        outdateDetail: outdateDetail,
+      })
+    }
   },
 
   /**

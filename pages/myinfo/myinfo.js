@@ -18,31 +18,45 @@ Page({
     if (!util.getMyUserId()) {
       //请求权限，获取微信用户信息
       this.getWxUserInfo()
+      .then(userInfo => {
+        return this.getWxCode(userInfo)
+      })
+      .then(data=>{ 
+        this.toGetMyUserId(data.code, data.userInfo)
+      })
     }
   },
 
   getWxUserInfo:function(){
-    wx.getUserInfo({
-      success: res => {
-        let userInfo = res.userInfo
-        this.getWxCode(userInfo)
-      }
+    console.log('获取授权')
+    return new Promise(function (resolve, reject) {
+      wx.getUserInfo({
+        success: res => {
+          let userInfo = res.userInfo
+          resolve(userInfo)
+        }
+      })
     })
   },
 
   getWxCode: function (userInfo){
-    wx.login({
-      success: res => {
-        let code = res.code
-        this.toGetMyUserId(code, userInfo)
-      }
+    console.log('获取登陆code')
+    return new Promise(function (resolve, reject) {
+      wx.login({
+        success: res => {
+          let code = res.code
+          resolve({ code, userInfo})
+        }
+      })
     })
   },
 
   toGetMyUserId:function(code,userInfo){
     //获取平台的userId
+    console.log('获取平台的userId')
     request.requestLoginTogetMyUserId(code, userInfo, (res) => {
       util.saveMyUserId(res.data.user_id)
+      console.log('userId：' + res.data.user_id)
       this.setData({
         username: userInfo.nickName,
         headerimagesrc: userInfo.avatarUrl,
