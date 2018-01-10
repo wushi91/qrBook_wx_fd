@@ -1,0 +1,40 @@
+<!--pages/book/book.wxml-->
+<view class='tob-tab'>
+
+
+  <view wx:for="{{tab_status}}"  wx:key
+        class='tob-tab-item {{currentStatus===tab_status[index].prop?"tob-tab-item-select":""}}' 
+        data-current-status="{{tab_status[index].prop}}" 
+        bindtap='payTabClick'>
+    <text>{{tab_status[index].label}}</text>
+  </view>
+</view>
+
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[0].prop}}'>
+  <view class='book-item' wx:for="{{allBookList}}" wx:key>
+    <text class='font-list-item'>{{item.address}}</text>
+    <text class='font-list-item-gray'>{{item.name}}</text>
+    <text class='font-list-item-gray' wx:if='{{!item.isUnused}}'>租期：{{item.start_time}}-{{item.end_time}}</text>
+    <text class='font-list-item-red' wx:else>添加租客信息</text>
+  </view>
+</view>
+
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[1].prop}}'>
+  <view class='book-item' wx:for="{{unusedBookList}}" wx:key>
+    <text class='font-list-item'>{{item.address}}</text>
+    <text class='font-list-item-gray'>{{item.name}}</text>
+    <text class='font-list-item-gray' wx:if='{{!item.isUnused}}'>租期：{{item.start_time}}-{{item.end_time}}</text>
+    <text class='font-list-item-red' wx:else>添加租客信息</text>
+  </view>
+</view>
+
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[2].prop}}'>
+  <view class='book-item' wx:for="{{outdateBookList}}" wx:key>
+    <text class='font-list-item'>{{item.address}}</text>
+    <view style='display:flex;margin-top: 6rpx;'>
+    <text style='flex:1;' class='font-list-item-gray'>交租日期：{{item.pay_time}}号</text>
+    <text class='font-list-item-red'>逾期{{item.overdueNum}}天</text>
+    </view>
+    
+  </view>
+</view>

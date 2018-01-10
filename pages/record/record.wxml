@@ -1,0 +1,68 @@
+<!--pages/record/record.wxml-->
+
+<view class='list-wrapper'>
+    <view class='month-item'>
+        <text class='month-title font-tip'>11月</text>
+        <view class='record-item'>
+            <view>
+                <text>收租（都市名园D栋26G）</text>
+                <text>+5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+        <view class='line'></view>
+        <view class='record-item'>
+            <view>
+                <text>收租（都市名园D栋26G）</text>
+                <text>+5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+        <view class='line'></view>
+        <view class='record-item'>
+            <view>
+                <text>收租（都市名园D栋26G）</text>
+                <text>+5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+    </view>
+    <view class='month-item'>
+        <text class='month-title font-tip'>11月</text>
+        <view class='record-item'>
+            <view>
+                <text>收租（都市名园D栋26G）</text>
+                <text>+5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+        <view class='line'></view>
+        <view class='record-item'>
+            <view>
+                <text>收租（都市名园D栋26G）</text>
+                <text>+5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+        <view class='line'></view>
+        <view class='record-item'>
+            <view>
+                <text>提现</text>
+                <text>-5000</text>
+            </view>
+            <view>
+                <text class='font-list-item-gray'>今天 20:49</text>
+            </view>
+        </view>
+    </view>
+</view>

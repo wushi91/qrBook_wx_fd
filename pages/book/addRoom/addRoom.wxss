@@ -1,0 +1,28 @@
+/* pages/book/addBook/addBook.wxss */
+
+picker{
+  margin-top: 30rpx;
+  background-color: white;
+  height:88rpx; 
+  
+}
+
+picker text{
+  display: inline-block;
+  padding: 20rpx 30rpx;
+}
+
+textarea{
+  padding: 20rpx 30rpx;
+  margin-top: 30rpx;
+  width: 100%;
+  font-size:34rpx;
+  color:black;
+  background-color: white;
+  height: 160rpx;
+}
+
+button{
+  margin-top: 180rpx;
+  width: 480rpx;
+}

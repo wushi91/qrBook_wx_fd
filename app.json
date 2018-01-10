@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/book/book",
+    "pages/book/addRoom/addRoom",
+    "pages/index/index",
+    
+    
+    "pages/myinfo/myinfo",
+    "pages/operaResult/operaResult",
+    "pages/myinfo/bindPhone/bindPhone",
+    
+    
+    "pages/beanDetail/beanDetail",
+    "pages/record/record",
+    "pages/bill/bill",
+    "pages/money/getCash/getCash",
+    "pages/money/money",
+    
+    "pages/renter/addRenter/addRenter"
+  ],
+  "window": {
+    "navigationBarTitleText": "租房账本",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2E8AE6",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7F8389",
+    "selectedColor": "#2E8AE6",
+    "borderStyle": "#000000",
+    "backgroundColor": "#F7F7FA",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon-index-normal.png",
+        "selectedIconPath": "images/icon-index-select.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/book/book",
+        "iconPath": "images/icon-book-normal.png",
+        "selectedIconPath": "images/icon-book-select.png",
+        "text": "账本"
+      },
+      {
+        "pagePath": "pages/myinfo/myinfo",
+        "iconPath": "images/icon-me-normal.png",
+        "selectedIconPath": "images/icon-me-select.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

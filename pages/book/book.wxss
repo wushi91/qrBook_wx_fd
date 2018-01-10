@@ -1,0 +1,17 @@
+/* pages/book/book.wxss */
+
+.list-wrapper{
+  padding-top: 100rpx;
+}
+
+.book-item{
+  margin-top: 20rpx;
+  background-color: white;
+  padding: 20rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-item text + text{
+  margin-top: 6rpx;
+}

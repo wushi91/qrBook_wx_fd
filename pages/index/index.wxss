@@ -1,0 +1,88 @@
+/* pages/index/index.wxss */
+.top-wrapper{
+  background-color: #2E8AE6;
+  padding: 40rpx 0;
+}
+
+.top-wrapper .top-title{
+  margin-left: 40rpx;
+  font-size:28rpx;
+  color:rgba(255,255,255,1);
+  line-height:40rpx;
+ 
+}
+
+.top-wrapper .item-wrapper{
+  margin-top: 20rpx;
+  display: flex;
+}
+
+.top-wrapper .item-wrapper .item{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40rpx;
+}
+.top-wrapper .item-wrapper .item.border-left-right{
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.top-wrapper .item-wrapper .item .item-money{
+  font-size:40rpx;
+  color:rgba(255,255,255,1);
+  line-height:56rpx;
+  display: block;
+  width: 180rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.top-wrapper .item-wrapper .item .item-money::before{
+  content: "￥"
+}
+
+.top-wrapper .item-wrapper .item .item-title{
+  font-size:24rpx;
+  color:rgba(255,255,255,0.6);
+  line-height:33rpx;
+}
+
+
+
+
+.center-wrapper{
+  display: flex;
+  background-color: white;
+}
+
+.center-wrapper .center-item{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56rpx 0 60rpx 0
+}
+
+.center-wrapper .center-item .item-image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+
+
+.center-wrapper .center-item .item-title{
+  font-size:28rpx;
+  color:rgba(53,53,53,1);
+  line-height:40rpx;
+  margin-top: 24rpx;
+}
+
+.bottom-wrapper{
+  margin-top: 320rpx;
+
+}
+
+.main-button{
+  width: 480rpx;
+}

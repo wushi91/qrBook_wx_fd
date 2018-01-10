@@ -1,0 +1,170 @@
+<!--pages/beanDetail/beanDetail.wxml-->
+<view class='title-wrapper'>
+  <text class='title'>都市名园D栋26G</text>
+</view>
+
+<!--租房详情  -->
+<view class='item-wrapper' wx:if='{{type==="bill_detail_nopay"||type==="bill_detail_haspay"}}'>
+  <view class='item'>
+    <text class='font-item-gray30'>账单金额</text>
+    <text class='{{type==="bill_detail_nopay"?"font-red-money":"font-black-money"}}'>5000</text>
+  </view>
+  <view class='line'></view>
+  <view class='item'>
+    <text class='font-item-gray30'>租客姓名</text>
+    <text class='font-item-gray30'>王大雷</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>手机号码</text>
+    <text class='font-item-gray30'>135 0874 9762</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>租金时间</text>
+    <text class='font-item-gray30'>2017/12/01 - 2017/12/30</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交租日期</text>
+    <text class='font-item-gray30'>30号</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>当前状态</text>
+    <text class='{{type==="bill_detail_nopay"?"font-item-red30":"font-item-gray30"}}'>{{type==="bill_detail_nopay"?"未结清":"已结清"}}</text>
+  </view>
+</view>
+
+
+<!--收租详情  -->
+<view class='item-wrapper' wx:if='{{type==="rent_detail"}}'>
+  <view class='item'>
+    <text class='font-item-gray30'>收租金额</text>
+    <text class='font-black-money"'>5000</text>
+  </view>
+  <view class='line'></view>
+  <view class='item'>
+    <text class='font-item-gray30'>租金时间</text>
+    <text class='font-item-gray30'>2017/12/01 - 2017/12/30</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>当前状态</text>
+    <text class='font-item-gray30'>交易成功</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易时间</text>
+    <text class='font-item-gray30'>2017/12/16 20:49</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易方式</text>
+    <text class='font-item-gray30'>招商银行储蓄卡</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易单号</text>
+    <text class='font-item-gray30"'>20171216873408863749</text>
+  </view>
+</view>
+
+
+<!--收租详情  -->
+<view class='item-wrapper' wx:if='{{type==="rent_detail"}}'>
+  <view class='item'>
+    <text class='font-item-gray30'>收租金额</text>
+    <text class='font-black-money"'>5000</text>
+  </view>
+  <view class='line'></view>
+  <view class='item'>
+    <text class='font-item-gray30'>租金时间</text>
+    <text class='font-item-gray30'>2017/12/01 - 2017/12/30</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>当前状态</text>
+    <text class='font-item-gray30'>交易成功</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易时间</text>
+    <text class='font-item-gray30'>2017/12/16 20:49</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易方式</text>
+    <text class='font-item-gray30'>招商银行储蓄卡</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易单号</text>
+    <text class='font-item-gray30"'>20171216873408863749</text>
+  </view>
+</view>
+
+
+<!--提现详情  -->
+<view class='item-wrapper' wx:if='{{type==="get_cash_detail"}}'>
+  <view class='item'>
+    <text class='font-item-gray30'>提现金额</text>
+    <text class='font-black-money"'>10000</text>
+  </view>
+  <view class='line'></view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>当前状态</text>
+    <text class='font-item-gray30'>交易成功</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易时间</text>
+    <text class='font-item-gray30'>2017/12/16 20:49</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>到账方式</text>
+    <text class='font-item-gray30'>微信零钱</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交易单号</text>
+    <text class='font-item-gray30"'>20171216873408863749</text>
+  </view>
+</view>
+
+
+<!--逾期详情  -->
+<view class='item-wrapper' wx:if='{{type==="outdate_detail"}}'>
+  <view class='item'>
+    <text class='font-item-gray30'>逾期金额</text>
+    <text class='font-red-money'>4500</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>逾期时长</text>
+    <text class='font-item-red30'>9天</text>
+  </view>
+  
+  <view class='line'></view>
+  <view class='item'>
+    <text class='font-item-gray30'>租客姓名</text>
+    <text class='font-item-gray30'>王大雷</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>手机号码</text>
+    <text class='font-item-gray30'>135 0874 9762</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>交租日期</text>
+    <text class='font-item-gray30'>5号</text>
+  </view>
+
+  <view class='item'>
+    <text class='font-item-gray30'>每月租金</text>
+    <text class='font-item-gray30'>4500元</text>
+  </view>
+</view>

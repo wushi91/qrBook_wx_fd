@@ -1,0 +1,9 @@
+<!--pages/book/addBook/addBook.wxml-->
+
+<picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+   <text class='font-list-item'>{{region[0]}}，{{region[1]}}，{{region[2]}}</text>
+</picker>
+
+<textarea bindinput="bindHouseNameInput" placeholder-style="color:rgba(178,178,178,1);" maxlength='70' placeholder="请填写账本名称，如房源地址、房号等"></textarea>
+
+<button class='main-button {{inputHouseName?"":"disabled"}}' disabled='{{inputHouseName?false:true}}' bindtap='toAddRoom'>保存</button>

@@ -1,0 +1,13 @@
+<!--pages/money/getCash/getCash.wxml-->
+<view class='cash-wrapper'>
+  <text class='font-tip'>提现金额</text>
+  <view class='input-wrapper'>
+
+  <input></input>
+  </view>
+  
+  <view class='line'></view>
+  <text class='cash-tip font-tip'>20,000</text>
+</view>
+
+<button class='main-button'>确认提现</button>
