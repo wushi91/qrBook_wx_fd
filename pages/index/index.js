@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current_month:new Date().getMonth()+1+'月',
+    current_month:'',
     current_month_total_money:0,
     current_month_hasget_money: 0,
     current_month_noget_money: 0,
@@ -18,6 +18,21 @@ Page({
   toAddRoomPage:function(){
     wx.navigateTo({
       url: "/pages/book/addRoom/addRoom"
+    })
+  },
+  toMoneyPage: function () {
+    wx.navigateTo({
+      url: "/pages/money/money"
+    })
+  },
+  toBillPage: function () {
+    wx.navigateTo({
+      url: "/pages/bill/bill"
+    })
+  },
+  toRecordPage: function () {
+    wx.navigateTo({
+      url: "/pages/record/record"
     })
   },
   /**
@@ -32,6 +47,7 @@ Page({
     }
 
     request.requestCurrentMonthTotalMoney(userId,res=>{
+      console.log(res)
       this.setData({
         current_month_total_money: res.data.money,
         current_month: res.data.month + '月'

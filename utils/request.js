@@ -8,27 +8,38 @@ const login_get_user_id_url = host +'/rentBook/authorization/landlord.do'
 
 //房东应收（首页）
 const current_month_money_total_url = host + '/rentBook/payment/receivable.do'
-//房东已收（首页）
 const current_month_money_hasget_url = host + '/rentBook/payment/received.do'
-//房东待收（首页）
 const current_month_money_noget_url = host + '/rentBook/payment/waite.do'
 
 
 //全部（账本）
 const get_all_book_url = host + '/rentBook/book/AllUserBooks.do'
-//闲置（账本）
 const get_unused_book_url = host + '/rentBook/house/findIdleHouse.do'
-//逾期（账本）
 const get_outdate_book_url = host + '/rentBook/book/selectOverdue.do'
+//
+const to_add_room_url = host + '/rentBook/house/addHousing.do'
 
 //租客相关
 const to_add_renter_url = host + '/rentBook/book/addBook.do'
 const get_renter_detail_url = host + '/rentBook/book/detail.do'
-const to_edit_renter_url = host + '/rentBook/update/updateTenantInfo.do'
+// const to_edit_renter_url = host + '/rentBook/update/updateTenantInfo.do'
 const to_delete_renter_url =host + '/rentBook/checkOut/status.do'
 
-//
-const to_add_room_url =  host + '/rentBook/house/addHousing.do'
+
+//money相关
+const get_myaccount_detail_url = host + '/rentBook/transact/showAccount.do'
+const get_cash_out_url = host + '/rentBook/payment/userwithdraw.do'
+
+
+//我的账单
+const get_all_bill_url = host + '/rentBook/book/AllSettle.do'
+const get_pay_bill_url = host + '/rentBook/book/selectSettle.do'
+const get_nopay_bill_url = host + '/rentBook/book/selectSettle.do'
+const get_bill_detail_url = host + '/rentBook/book/billsDetail.do'
+
+//交易记录
+const get_all_record_url = host + '/rentBook/transact/transactInfo.do'
+const get_record_detail_url = host + '/rentBook/transact/transactDetail.do'
 
 //登录
 const requestLoginTogetMyUserId = function (wxCode, wxUserInfo, code200) {
@@ -115,6 +126,16 @@ const requestToAddRenter = function (user_id, hid, renterDetail, code200, error)
   util.wxGet(to_add_renter_url, data, code200, error)
 }
 
+//租客退房，也就是删除账本
+const requestToDeleteRenter = function (user_id, bookId, code200, error) {
+  let data = {
+    // user_id: user_id,
+    id: bookId,
+  }
+  util.wxGet(to_delete_renter_url, data, code200, error)
+}
+
+//获取租客详情也就是账本详情
 const requestGetRenterDetail = function (user_id, bookId, code200, error) {
   let data = {
     id: bookId,
@@ -122,6 +143,75 @@ const requestGetRenterDetail = function (user_id, bookId, code200, error) {
   util.wxGet(get_renter_detail_url, data, code200, error)
 }
 
+//获取账户余额
+const requestMyAccountDetail = function (user_id, code200, error) {
+  let data = {
+    user_id: user_id,
+  }
+  util.wxGet(get_myaccount_detail_url, data, code200, error)
+}
+
+//提现
+const requestGetCashOut = function (user_id,cardId,moneyToCash,code200, error) {
+  let data = {
+    user_id: user_id,
+    cardid: cardId,
+    balance: moneyToCash,
+  }
+  util.wxGet(get_cash_out_url, data, code200, error)
+}
+
+
+//获取全部账单
+const requestAllBillList = function (user_id, code200, error) {
+  let data = {
+    user_id: user_id,
+  }
+  util.wxGet(get_all_bill_url, data, code200, error)
+}
+
+//获取已结清的账单
+const requestHaspayBillList = function (user_id, code200, error) {
+  let data = {
+    user_id: user_id,
+  }
+  util.wxGet(get_pay_bill_url, data, code200, error)
+}
+
+//获取未结清的账单
+const requestNopayBillList = function (user_id, code200, error) {
+  let data = {
+    user_id: user_id,
+  }
+  util.wxGet(get_nopay_bill_url, data, code200, error)
+}
+
+//账单详情
+const requestBillDetail = function (user_id, billId,code200, error) {
+  let data = {
+    user_id: user_id,
+    id: billId,
+  }
+  util.wxGet(get_bill_detail_url, data, code200, error)
+}
+
+
+//交易记录
+const requestAllRecordList = function (user_id, code200, error) {
+  let data = {
+    user_id: user_id,
+  }
+  util.wxGet(get_all_record_url, data, code200, error)
+}
+
+const requestRecordDetail = function (user_id, recordType,payId,code200, error) {
+  let data = {
+    user_id: userId,
+    abstracts: recordType,//提现 or 收租 or交租
+    pay_id: payId
+  }
+  util.wxGet(get_record_detail_url, data, code200, error)
+}
 
 
 
@@ -136,4 +226,13 @@ module.exports = {
   requestToAddRoom,
   requestToAddRenter,
   requestGetRenterDetail,
+  requestMyAccountDetail,
+  requestGetCashOut,
+  requestAllBillList,
+  requestHaspayBillList,
+  requestNopayBillList,
+  requestAllRecordList,
+  requestRecordDetail,
+  requestToDeleteRenter,
+
 }

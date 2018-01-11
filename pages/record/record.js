@@ -8,6 +8,25 @@ Page({
   
   },
 
+  //收租详情
+  toRentDetailPage: function (e) {
+    let payId = e.currentTarget.dataset.payId
+    let recordType = e.currentTarget.dataset.recordType
+    wx.navigateTo({
+      url: '/pages/beanDetail/beanDetail?type=rent_detail&recordType=' + recordType + '&payId=' + payId
+    })
+  },
+  //提现详情
+  toGetCashDetailPage: function (e) {
+    let payId = e.currentTarget.dataset.payId
+    let recordType = e.currentTarget.dataset.recordType
+    wx.navigateTo({
+      url: '/pages/beanDetail/beanDetail?type=get_cash_detail&recordType=' + recordType + '&payId=' + payId
+    })
+  },
+
+  
+
   /**
    * 生命周期函数--监听页面加载
    */

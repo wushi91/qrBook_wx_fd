@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
-<view class='top-wrapper'>
+ <view class='top-wrapper'>
   <text class='top-title'>{{current_month}}房租</text>
-  <view class='item-wrapper'>
+  <view class='item-wrapper clearfix'>
     <view class='item'>
       <text class='item-money'>{{current_month_total_money}}</text><text class='item-title'>应收金额</text>
     </view>
@@ -12,18 +12,18 @@
       <text class='item-money'>{{current_month_noget_money}}</text><text class='item-title'>待收金额</text>
     </view>
   </view>
-</view>
+</view> 
 
 <view class='center-wrapper'>
-  <view class='center-item'>
+  <view class='center-item' bindtap='toMoneyPage'>
     <image class='item-image icon-money' src="/images/icon-myaccount.png"></image>
     <text class='item-title'>我的账户</text>
   </view>
-  <view class='center-item'>
+  <view class='center-item' bindtap='toBillPage'>
     <image class='item-image icon-bill' src="/images/icon-tenantbill.png"></image>
     <text class='item-title'>租客账单</text>
   </view>
-  <view class='center-item'>
+  <view class='center-item' bindtap='toRecordPage'>
     <image class='item-image icon-record' src="/images/icon-transactionrecord.png"></image>
     <text class='item-title'>交易记录</text>
   </view>

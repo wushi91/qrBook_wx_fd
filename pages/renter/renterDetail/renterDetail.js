@@ -17,6 +17,8 @@ Page({
     renterDetail:null,
 
     bookid:'',
+    userId:'',
+
     renterRecordList:[{},{},{}]
   },
 
@@ -38,6 +40,7 @@ Page({
     
   },
 
+
   getTheRenterDeatil: function (userId, bookid){
     if (this.data.renterDetail!==null){
       return
@@ -51,16 +54,65 @@ Page({
       })
     })
   },
+
+  deleteTheRenter: function (userId, bookid){
+    request.requestToDeleteRenter(userId, bookid,res=>{
+      console.log(res)
+
+      wx.showToast({
+        title: '退房成功',
+        icon: 'success',
+        duration: 1000
+      })
+      
+      setTimeout(function(){
+        wx.navigateBack({
+          delta: 1
+        })
+      },1000)
+      
+    })
+  },
+
+  showDeleteTheRenter: function () {
+    wx.showModal({
+      title: '租客退房',
+      content: '确认租客退房之后将删除该租客的租房信息，请和租客确认好已结清所有房租',
+      cancelText: '确定',
+      cancelColor: '#F24949',
+      confirmText: '取消',
+      confirmColor: '#000000',
+      success:res=> {
+        if (res.confirm) {
+          //这里是取消，因为调换了按钮的位置
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          //这里是确定
+          this.deleteTheRenter(this.data.userId,this.data.bookid)
+        }
+      }
+    })
+  },
+
+  //收租详情
+  toRentDetailPage: function (e) {
+    let payId = e.currentTarget.dataset.payId
+    let recordType = e.currentTarget.dataset.recordType
+    wx.navigateTo({
+      url: '/pages/beanDetail/beanDetail?type=rent_detail&recordType=' + recordType + '&payId=' + payId
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let userId = util.getMyUserId()
     this.setData({
       bookid: options.bookid,
+      userId: userId,
     })
 
-    let userId = util.getMyUserId()
+    
     this.getTheRenterDeatil(userId, options.bookid)
     
   },

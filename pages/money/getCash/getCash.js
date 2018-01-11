@@ -1,11 +1,34 @@
 // pages/money/getCash/getCash.js
+
+const request = require('../../../utils/request.js')
+const util = require('../../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    inputMoney:''
+  },
+
+  bindMoneyInput: function (e) {
+    this.setData({
+      inputMoney: e.detail.value
+    })
+  },
+
+  toGetCashOut:function(){
+    console.log(this.data.inputMoney)
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      return
+    }
+    request.requestGetCashOut(userId, 1, res=>{
+      console.log('000---000')
+      console.log(res)
+    })
   },
 
   /**

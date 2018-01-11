@@ -3,11 +3,13 @@
   <text class='font-tip'>提现金额</text>
   <view class='input-wrapper'>
 
-  <input></input>
+  <input type='digit' 
+          maxlength='8'
+          bindinput='bindMoneyInput'></input>
   </view>
   
   <view class='line'></view>
   <text class='cash-tip font-tip'>20,000</text>
 </view>
 
-<button class='main-button'>确认提现</button>
+<button class='main-button' bindtap='toGetCashOut'>确认提现</button>

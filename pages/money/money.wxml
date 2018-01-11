@@ -3,7 +3,7 @@
 <view class='money-wrapper'>
   <image src="/images/icon-accountbalance.png"></image>
   <text class='font-list-item'>账户余额</text>
-  <text class='balance'>32000</text>
-  <button class='main-button'>提现</button>
+  <text class='balance'>{{balance}}</text>
+  <button class='main-button' bindtap='toGetCashPage'>提现</button>
   <text class='cash-tip'>用户提现单笔单日限额</text>
 </view>

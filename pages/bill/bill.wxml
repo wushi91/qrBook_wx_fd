@@ -1,13 +1,12 @@
 <!--pages/bill/bill.wxml-->
+
+
 <view class='tob-tab'>
-  <view class='tob-tab-item tob-tab-item-select'>
-    <text>全部</text>
-  </view>
-  <view class='tob-tab-item'>
-    <text>未结清</text>
-  </view>
-   <view class='tob-tab-item'>
-    <text>已结清</text>
+  <view wx:for="{{tab_status}}"  wx:key
+        class='tob-tab-item {{currentStatus===tab_status[index].prop?"tob-tab-item-select":""}}' 
+        data-current-status="{{tab_status[index].prop}}" 
+        bindtap='payTabClick'>
+    <text>{{tab_status[index].label}}</text>
   </view>
 </view>
 
@@ -15,7 +14,7 @@
 <view class='list-wrapper'>
   <view class='month-item'>
     <text class='month-title font-tip'>12月</text>
-    <view class='bill-item'>
+    <view class='bill-item' bindtap='toUnpayBillDetailPage'>
       <view>
         <text class='font-list-item'>都市名园D栋26G</text>
         <text class='font-red-money'>5000</text>

@@ -9,12 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    types: [
-      { bill_detail_haspay:'租房详情'},
-      { bill_detail_nopay: '租房详情' },
-      { rent_detail: '收租详情' },
-      { get_cash_detail: '提现详情' },
-      { outdate_detail: '逾期详情' },],
+    types: 
+      {bill_detail_haspay:'账单详情',
+      bill_detail_nopay: '账单详情' ,
+       rent_detail: '收租详情' ,
+       get_cash_detail: '提现详情' ,
+       outdate_detail: '逾期详情'} ,
     type:'outdate_detail',
     address:'',
     outdateDetail:null,
@@ -27,6 +27,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       type: options.type,
+    })
+    
+    wx.setNavigationBarTitle({
+      title: this.data.types[options.type]
     })
 
 

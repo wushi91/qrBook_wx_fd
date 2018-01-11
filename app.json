@@ -1,12 +1,14 @@
 {
   "pages": [
     "pages/book/book",
+    "pages/index/index",
+    
     "pages/myinfo/myinfo",
     "pages/renter/addRenter/addRenter",
     "pages/renter/renterDetail/renterDetail",
     
     "pages/book/addRoom/addRoom",
-    "pages/index/index",
+    
     
     "pages/operaResult/operaResult",
     "pages/myinfo/bindPhone/bindPhone",
