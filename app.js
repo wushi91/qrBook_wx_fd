@@ -35,5 +35,12 @@ App({
   },
   globalData: {
     userInfo: null
-  }
+  },
+
+  updateMyBookPage: function () {
+    console.log('updateMyBookPage')
+  },
+  updateMyIndexPage: function () {
+    console.log('updateMyIndexPage')
+  },
 })

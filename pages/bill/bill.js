@@ -27,28 +27,40 @@ Page({
     //点击tab对应的点击事件
     switch (currentStatus) {
       //全部
-      case this.data.tab_status[0].prop: this.getAllBill(userId)
+      case this.data.tab_status[0].prop: 
+        if (this.data.allBillList === null) {
+          this.getAllBill(userId)
+        }
         break
       //闲置
-      case this.data.tab_status[1].prop: this.getUnpayBill(userId)
+      case this.data.tab_status[1].prop: 
+        if (this.data.unpayBillList === null) {
+          this.getUnpayBill(userId)
+        }
         break
       //逾期
-      case this.data.tab_status[2].prop: this.getHaspayBill(userId)
+      case this.data.tab_status[2].prop: 
+        if (this.data.haspayBillList === null) {
+          this.getHaspayBill(userId)
+        }
         break
     }
   },
 
 
   getAllBill: function (userId){
-    if (this.data.allBillList !== null) {
-      //已经有数据了不请求
-      return
-    }
-    
     request.requestAllBillList(userId,res=>{
-      console.log(res)
+      console.log(res.data.list)
+
+      let billList = res.data.list
+      for(let i=0;i<billList.length;i++){
+        let item = billList[i]
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time) 
+      }
+
       this.setData({
-        allBillList: res.data.list
+        allBillList: billList
       })
     })
 
@@ -56,17 +68,35 @@ Page({
   },
 
   getUnpayBill: function (userId) {
-    if (this.data.unpayBillList !== null) {
-      //已经有数据了不请求
-      return
-    }
+    request.requestNopayBillList(userId, res => {
+      console.log(res.data.list)
+
+      let billList = res.data.list
+      for (let i = 0; i < billList.length; i++) {
+        let item = billList[i]
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time)
+      }
+      this.setData({
+        unpayBillList: billList
+      })
+    }) 
     console.log('getUnpayBill')
   },
   getHaspayBill: function (userId) {
-    if (this.data.haspayBillList !== null) {
-      //已经有数据了不请求
-      return
-    }
+    request.requestHaspayBillList(userId, res => {
+      console.log(res.data.list)
+      let billList = res.data.list
+      for (let i = 0; i < billList.length; i++) {
+        let item = billList[i]
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time)
+      }
+
+      this.setData({
+        haspayBillList: billList
+      })
+    })
     console.log('getHaspayBill')
   },
 
@@ -88,7 +118,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      return
+    }
+    this.getAllBill(userId)
   },
 
   /**
@@ -123,7 +158,26 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      return
+    }
+    let currentStatus = this.data.currentStatus
+    switch (currentStatus) {
+      //全部
+      case this.data.tab_status[0].prop:
+        this.getAllBill(userId)
+        break
+      //未结清
+      case this.data.tab_status[1].prop:
+        this.getUnpayBill(userId)
+        break
+      //已结清
+      case this.data.tab_status[2].prop:
+        this.getHaspayBill(userId)
+        break
+    }
   },
 
   /**

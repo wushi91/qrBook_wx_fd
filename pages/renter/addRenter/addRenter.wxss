@@ -60,3 +60,7 @@
 button{
   margin-top: 60rpx;
 }
+
+.font-list-item.font-gray{
+  color:rgba(178,178,178,1);
+}

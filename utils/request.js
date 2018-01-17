@@ -1,6 +1,7 @@
 const util = require('../utils/util.js')
 
-const host = 'http://192.168.2.221:8080'//测试用
+const host = 'http://192.168.2.119:8080'
+// const host = 'http://192.168.2.221:8080'//测试用
 // const host = 'https://www.0755qr.com'
 
 //登录
@@ -18,6 +19,7 @@ const get_unused_book_url = host + '/rentBook/house/findIdleHouse.do'
 const get_outdate_book_url = host + '/rentBook/book/selectOverdue.do'
 //
 const to_add_room_url = host + '/rentBook/house/addHousing.do'
+const to_delete_book_url= host + '/rentBook/update/DelLedgers.do'
 
 //租客相关
 const to_add_renter_url = host + '/rentBook/book/addBook.do'
@@ -28,7 +30,7 @@ const to_delete_renter_url =host + '/rentBook/checkOut/status.do'
 
 //money相关
 const get_myaccount_detail_url = host + '/rentBook/transact/showAccount.do'
-const get_cash_out_url = host + '/rentBook/payment/userwithdraw.do'
+const get_cash_out_url = host + '/rentBook/payment/wxUserwithdraw.do'
 
 
 //我的账单
@@ -40,6 +42,9 @@ const get_bill_detail_url = host + '/rentBook/book/billsDetail.do'
 //交易记录
 const get_all_record_url = host + '/rentBook/transact/transactInfo.do'
 const get_record_detail_url = host + '/rentBook/transact/transactDetail.do'
+const get_renter_record_url = host + '/rentBook/book/records.do'
+// const get_all_record_url = host + '/rentBook/book/queryRecordsDetail.do'
+
 
 //登录
 const requestLoginTogetMyUserId = function (wxCode, wxUserInfo, code200) {
@@ -107,6 +112,17 @@ const requestToAddRoom = function (user_id, province, city, address,code200, err
   }
   util.wxGet(to_add_room_url, data, code200, error)
 }
+//删除房子
+const requestToDeleteRoom = function (user_id, houseId, bookId, code200, error) {
+  let data = {
+    hid: houseId,
+    id: bookId,
+  }
+  util.wxGet(to_delete_book_url, data, code200, error)
+}
+
+
+
 
 //添加租客，其实就是账本
 const requestToAddRenter = function (user_id, hid, renterDetail, code200, error) {
@@ -152,10 +168,10 @@ const requestMyAccountDetail = function (user_id, code200, error) {
 }
 
 //提现
-const requestGetCashOut = function (user_id,cardId,moneyToCash,code200, error) {
+const requestGetCashOut = function (user_id,moneyToCash,code200, error) {
   let data = {
     user_id: user_id,
-    cardid: cardId,
+    // cardid: cardId,
     balance: moneyToCash,
   }
   util.wxGet(get_cash_out_url, data, code200, error)
@@ -174,6 +190,7 @@ const requestAllBillList = function (user_id, code200, error) {
 const requestHaspayBillList = function (user_id, code200, error) {
   let data = {
     user_id: user_id,
+    settle: '已结清'
   }
   util.wxGet(get_pay_bill_url, data, code200, error)
 }
@@ -182,6 +199,7 @@ const requestHaspayBillList = function (user_id, code200, error) {
 const requestNopayBillList = function (user_id, code200, error) {
   let data = {
     user_id: user_id,
+    settle: '未结清'
   }
   util.wxGet(get_nopay_bill_url, data, code200, error)
 }
@@ -204,15 +222,23 @@ const requestAllRecordList = function (user_id, code200, error) {
   util.wxGet(get_all_record_url, data, code200, error)
 }
 
-const requestRecordDetail = function (user_id, recordType,payId,code200, error) {
+const requestRecordDetail = function (user_id,payId,code200, error) {
   let data = {
-    user_id: userId,
-    abstracts: recordType,//提现 or 收租 or交租
+    user_id: user_id,
+    // abstracts: recordType,//提现 or 收租 or交租
     pay_id: payId
   }
   util.wxGet(get_record_detail_url, data, code200, error)
 }
 
+//获取指定租客的详情
+const requestRenterRecordList = function (phone,name, code200, error) {
+  let data = {
+    phone: phone,
+    name: name,
+  }
+  util.wxGet(get_renter_record_url, data, code200, error)
+}
 
 
 module.exports = {
@@ -234,5 +260,6 @@ module.exports = {
   requestAllRecordList,
   requestRecordDetail,
   requestToDeleteRenter,
-
+  requestRenterRecordList,
+  requestToDeleteRoom
 }

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "交易记录"
+  "navigationBarTitleText": "交易记录",
+  "enablePullDownRefresh": true
 }

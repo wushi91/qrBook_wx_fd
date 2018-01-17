@@ -3,6 +3,7 @@
 
 const util = require('../../../utils/util.js')
 const request = require('../../../utils/request.js')
+const app = getApp()
 
 Page({
 
@@ -32,6 +33,7 @@ Page({
     }
     request.requestToAddRoom(userId, this.data.region[0], this.data.region[1], this.data.inputHouseName,res=>{
       console.log(res)
+      app.updateMyBookPage()
       wx.navigateBack({
         delta: 1
       })

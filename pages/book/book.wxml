@@ -16,16 +16,27 @@
 </view>
 
 <view class='list-wrapper' wx-if='{{currentStatus===tab_status[0].prop}}'>
-  <view class='book-item' wx:for="{{allBookList}}" wx:key 
+<view class='item-wrapper {{moveHid===item.hid?"has-move":""}}' wx:for="{{allBookList}}" wx:key>
+  <view class='book-item'  
         data-bookid="{{item.id}}" 
         data-houseid="{{item.hid}}" 
         data-address="{{item.address}}"
+        bindtouchstart='itemTouchstart'
+        bindtouchend='itemTouchend'
         bindtap='{{!item.isUnused?"toRenterDetailPage":"toAddRenterPage"}}'>
     <text class='font-list-item'>{{item.address}}</text>
     <text class='font-list-item-gray'>{{item.name}}</text>
     <text class='font-list-item-gray' wx:if='{{!item.isUnused}}'>租期：{{item.start_time}}-{{item.end_time}}</text>
     <text class='font-list-item-red' wx:else>添加租客信息</text>
   </view>
+  <view class='btn-del' 
+        data-bookid="{{item.id}}" 
+        data-houseid="{{item.hid}}" 
+        data-address="{{item.address}}"
+        bindtap='toDeleteRoom'>
+      <text>删除</text>
+  </view>
+</view>
 </view>
 
 

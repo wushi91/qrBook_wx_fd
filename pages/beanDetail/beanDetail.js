@@ -11,16 +11,51 @@ Page({
   data: {
     types: 
       {bill_detail_haspay:'账单详情',
-      bill_detail_nopay: '账单详情' ,
+        bill_detail_nopay: '账单详情' ,
        rent_detail: '收租详情' ,
        get_cash_detail: '提现详情' ,
        outdate_detail: '逾期详情'} ,
     type:'outdate_detail',
     address:'',
     outdateDetail:null,
+    rentDetail:null,
+    getCashDetail: null,
+    payId:'',
   },
 
+
+  getRentDetail: function (userId,payId){
+    request.requestRecordDetail(userId, payId, res=>{
+      let rentDetail = res.data.list
+      rentDetail.trading_time = util.getFormateDateWithTime(rentDetail.trading_time)
+      rentDetail.end_time = util.getFormateDate(rentDetail.end_time)
+      rentDetail.start_time = util.getFormateDate(rentDetail.start_time)
+      this.setData({
+        address: res.data.list.address,
+        rentDetail: res.data.list
+      })
+    },res=>{
+      console.log(res.data)
+    })
+  },
   
+  getGetCashDetail: function (userId,payId) {
+
+    request.requestRecordDetail(userId, payId, res => { 
+      console.log('getGetCashDetail')
+      console.log(res.data) 
+
+      let getCashDetail =  res.data.tixian
+      getCashDetail.trading_time = util.getFormateDateWithTime(getCashDetail.trading_time)
+      
+      this.setData({
+        address: '提现',
+        getCashDetail: getCashDetail
+      })
+    }, res => {
+      console.log(res.data)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -49,6 +84,25 @@ Page({
         outdateDetail: outdateDetail,
       })
     }
+
+    if (options.type === 'rent_detail') {
+      console.log('rent_detail')
+      this.setData({
+        payId: options.payId,
+      })
+      let userId = util.getMyUserId()
+      this.getRentDetail(userId,options.payId)
+    }
+
+    if (options.type === 'get_cash_detail') {
+      console.log('get_cash_detail')
+      this.setData({
+        payId: options.payId,
+      })
+      let userId = util.getMyUserId()
+      this.getGetCashDetail(userId,options.payId)
+    }
+    
   },
 
   /**

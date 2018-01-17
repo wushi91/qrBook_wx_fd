@@ -1,5 +1,5 @@
 // pages/renter/renterDetail/renterDetail.js
-
+const app = getApp()
 const request = require('../../../utils/request.js')
 const util = require('../../../utils/util.js')
 
@@ -19,7 +19,7 @@ Page({
     bookid:'',
     userId:'',
 
-    renterRecordList:[{},{},{}]
+    renterRecordList:null
   },
 
   payTabClick: function (e) {
@@ -36,27 +36,55 @@ Page({
 
     if (currentStatus === this.data.tab_status[1].prop) {
       console.log(this.data.tab_status[1].label)
+      if (this.data.renterRecordList===null){
+        if (this.data.renterDetail!==null)
+          this.getRenterRecordList(this.data.renterDetail.phone, this.data.renterDetail.name)
+      }
     }
     
   },
 
 
+  getRenterRecordList: function (phone, name){
+    request.requestRenterRecordList(phone,name,res=>{
+      this.setData({
+        renterRecordList: res.data.list
+      })
+      console.log(res.data)
+    },res=>{
+      console.log(res)
+    })
+  },
   getTheRenterDeatil: function (userId, bookid){
     if (this.data.renterDetail!==null){
       return
     }
     request.requestGetRenterDetail(userId, bookid, res => {
+      
       let renterDetail = res.data.list
+      console.log(renterDetail)
       renterDetail.address = renterDetail.houselist.address
-
+      renterDetail.end_time = util.getFormateDate(renterDetail.end_time)
+      renterDetail.start_time = util.getFormateDate(renterDetail.start_time)
       this.setData({
         renterDetail: renterDetail
       })
     })
   },
 
+  //收租详情
+  toRentDetailPage: function (e) {
+
+    let payId = e.currentTarget.dataset.payId
+
+    let recordType = e.currentTarget.dataset.recordType
+    wx.navigateTo({
+      url: '/pages/beanDetail/beanDetail?type=rent_detail&recordType=' + recordType + '&payId=' + payId
+    })
+  },
   deleteTheRenter: function (userId, bookid){
     request.requestToDeleteRenter(userId, bookid,res=>{
+      app.updateMyBookPage()
       console.log(res)
 
       wx.showToast({

@@ -24,7 +24,8 @@
 <view class='item picker-item'>
   <text>起租日期</text>
   <picker mode="date" bindchange="bindRentStartDateChange" value="{{rentStartDate}}">
-    <text class='font-list-item'>{{rentStartDate}}</text>
+    <text class='font-list-item' wx:if='{{rentStartDate?true:false}}'>{{rentStartDate}}</text>
+    <text class='font-list-item font-gray' wx:else>请选择起租日期</text>
   </picker>
   <image src="/images/can-into-right.png"></image>
 </view>
@@ -32,7 +33,9 @@
 <view class='item picker-item'>
   <text>租期时长</text>
   <picker mode="selector" bindchange="bindRentLengthChange" value="{{rentLengthArrayIndex}}" range="{{rentLengthArray}}">
-    <text class='font-list-item'>{{rentLengthArray[rentLengthArrayIndex]}}个月</text>
+    <text class='font-list-item' wx:if='{{rentLength?true:false}}'>{{rentLength}}个月</text>
+    <text class='font-list-item font-gray' wx:else>请选择租期时长</text>
+    <!-- <text class='font-list-item'>{{rentLengthArray[rentLengthArrayIndex]}}个月</text> -->
   </picker>
   <image src="/images/can-into-right.png"></image>
 </view>
@@ -42,15 +45,23 @@
 <view class='item picker-item'>
   <text>交租方式</text>
   <picker mode="selector" bindchange="bindPayWayChange" value="{{payWayArrayIndex}}" range="{{payWayArray}}">
-    <text class='font-list-item'>{{payWayArray[payWayArrayIndex]}}月/付</text>
+
+    <text class='font-list-item' wx:if='{{rentPayWay?true:false}}'>{{rentPayWay}}月/付</text>
+    <text class='font-list-item font-gray' wx:else>请选择交租方式</text>
+
+    <!-- <text class='font-list-item'>{{payWayArray[payWayArrayIndex]}}月/付</text> -->
   </picker>
   <image src="/images/can-into-right.png"></image>
 </view>
 <view class='line'></view>
 <view class='item picker-item'>
   <text>交租日期</text>
-  <picker mode="selector" bindchange="bindPayDayChange" value="{{payDayArrayIndex}}" range="{{payDayArray}}">
-    <text class='font-list-item'>{{payDayArray[payDayArrayIndex]}}号</text>
+  <picker mode="selector" bindchange="bindPayDayChange" value="{{payDayArrayIndex}}" range="{{payDayArray}}" bindconfirm='bindconfirm'>
+
+    <text class='font-list-item' wx:if='{{rentPayDate?true:false}}'>{{rentPayDate}}号</text>
+    <text class='font-list-item font-gray' wx:else>请选择交租日期</text>
+
+    <!-- <text class='font-list-item'>{{payDayArray[payDayArrayIndex]}}号</text> -->
   </picker>
   <image src="/images/can-into-right.png"></image>
 </view>

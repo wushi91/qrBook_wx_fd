@@ -16,6 +16,11 @@
   padding: 20rpx 30rpx;
 }
 
+.bill-item{
+  /*兄弟选择器  */
+  margin-top: 20rpx;
+}
+
 .bill-item + .bill-item{
   /*兄弟选择器  */
   margin-top: 20rpx;

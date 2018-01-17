@@ -1,5 +1,42 @@
 <!--pages/record/record.wxml-->
 
+
+
+<view class='list-wrapper'>
+  <view class='record-item-wrapper' wx:for="{{allRecordist}}" wx:key>
+    <view class='record-item' bindtap='toRentDetailPage'  wx:if='{{item.abstracts==="收租"}}' data-pay-id='{{item.pay_id}}'>
+      <view>
+        <text>{{item.abstracts}}（{{item.address}}）</text>
+        <text>+{{item.balance}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>{{item.trading_time}}</text>
+      </view>
+    </view>
+
+    <view class='record-item' bindtap='toGetCashDetailPage'  wx:else data-pay-id='{{item.pay_id}}'>
+      <view>
+        <text>{{item.abstracts}}</text>
+        <text>-{{item.balance}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>{{item.trading_time}}</text>
+      </view>
+    </view>
+    <view class='line' wx:if="{{index <allRecordist.length-1}}"></view>
+  </view>
+  
+</view>
+
+
+
+
+
+
+
+<!-- 
+
+
 <view class='list-wrapper'>
     <view class='month-item'>
         <text class='month-title font-tip'>11月</text>
@@ -73,4 +110,4 @@
     </view>
 
     
-</view>
+</view> -->

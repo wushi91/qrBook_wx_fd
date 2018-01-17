@@ -41,32 +41,32 @@
 <view class='item-wrapper' wx:if='{{type==="rent_detail"}}'>
   <view class='item'>
     <text class='font-item-gray30'>收租金额</text>
-    <text class='font-black-money"'>5000</text>
+    <text class='font-black-money"'>{{rentDetail.balance}}</text>
   </view>
   <view class='line'></view>
   <view class='item'>
     <text class='font-item-gray30'>租金时间</text>
-    <text class='font-item-gray30'>2017/12/01 - 2017/12/30</text>
+    <text class='font-item-gray30'>{{rentDetail.start_time}} - {{rentDetail.end_time}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>当前状态</text>
-    <text class='font-item-gray30'>交易成功</text>
+    <text class='font-item-gray30'>交易{{rentDetail.status}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交易时间</text>
-    <text class='font-item-gray30'>2017/12/16 20:49</text>
+    <text class='font-item-gray30'>{{rentDetail.trading_time}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交易方式</text>
-    <text class='font-item-gray30'>招商银行储蓄卡</text>
+    <text class='font-item-gray30'>{{rentDetail.paytype}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交易单号</text>
-    <text class='font-item-gray30"'>20171216873408863749</text>
+    <text class='font-item-gray30"'>{{rentDetail.orderid}}</text>
   </view>
 </view>
 
@@ -76,28 +76,28 @@
 <view class='item-wrapper' wx:if='{{type==="get_cash_detail"}}'>
   <view class='item'>
     <text class='font-item-gray30'>提现金额</text>
-    <text class='font-black-money"'>10000</text>
+    <text class='font-black-money"'>{{getCashDetail.balance}}</text>
   </view>
   <view class='line'></view>
 
   <view class='item'>
     <text class='font-item-gray30'>当前状态</text>
-    <text class='font-item-gray30'>交易成功</text>
+    <text class='font-item-gray30'>交易{{getCashDetail.status}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交易时间</text>
-    <text class='font-item-gray30'>2017/12/16 20:49</text>
+    <text class='font-item-gray30'>{{getCashDetail.trading_time}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>到账方式</text>
-    <text class='font-item-gray30'>微信零钱</text>
+    <text class='font-item-gray30'>{{getCashDetail.paytype}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交易单号</text>
-    <text class='font-item-gray30"'>20171216873408863749</text>
+    <text class='font-item-gray30"'>{{getCashDetail.orderid}}</text>
   </view>
 </view>
 

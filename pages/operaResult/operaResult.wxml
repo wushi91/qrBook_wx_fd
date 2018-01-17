@@ -2,7 +2,7 @@
 
   <view wx:if="{{ operaType ==='get_cash_success' }}" class='wrapper'>
     <image src="/images/image-success.png"></image>
-    <text class='opera-reulst'>账户余额10,000元提现成功</text>
+    <text class='opera-reulst'>{{cash}}元提现成功</text>
     <text class='opera-tip'></text>
     <button class='main-button' bindtap="backToIndexPage">返回首页</button>
   </view>

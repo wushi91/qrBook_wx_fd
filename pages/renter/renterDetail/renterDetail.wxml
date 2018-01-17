@@ -75,12 +75,12 @@
 
 
 <view class='list-wrapper' wx-if='{{currentStatus===tab_status[1].prop}}'>
-  <view class='record-item' wx:for="{{renterRecordList}}" wx:key bindtap='toRentDetailPage'>
+  <view class='record-item' wx:for="{{renterRecordList}}" wx:key bindtap='toRentDetailPage'  data-pay-id='{{item.pay_id}}'>
     <view>
-      <text>2017年12月房租</text>
-      <text class='font-black-money'>5000</text>
+      <text>{{item.title}}</text>
+      <text class='font-black-money'>{{item.balance}}</text>
     </view>
-    <text class='font-list-item-gray'>今天 20:49</text>
+    <text class='font-list-item-gray'>{{item.trading_time}}</text>
  
   </view>
 </view>

@@ -1,5 +1,5 @@
 // pages/renter/addRenter/addRenter.js
-
+const app = getApp()
 const request = require('../../../utils/request.js')
 const util = require('../../../utils/util.js')
 
@@ -14,7 +14,8 @@ Page({
 
     renterName: '',
     renterPhone: '',
-    rentStartDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+    rentStartDate: '',
+    // new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
     rentLength: '',
     rentOverDate: '',
     rentPayWay: '',//默认1月一付
@@ -22,8 +23,10 @@ Page({
     yaJinMoney: '',
     rentMoney: '',
 
+    
 
-    rentLengthArrayIndex: 5,//默认为6个月
+
+    rentLengthArrayIndex: 11,//默认为6个月
     payDayArrayIndex: new Date().getDate() - 1,//默认为当天号
     payWayArrayIndex: 0,//默认为1月1付
 
@@ -34,6 +37,9 @@ Page({
     
   },
 
+  bindconfirm:function(){
+    console.log('000000000000')
+  },
 
   bindRenterNameInput: function (e) {
     this.setData({
@@ -98,6 +104,7 @@ Page({
     }
     let userId = util.getMyUserId()
     request.requestToAddRenter(userId,this.data.houseid, renterDetail, res=>{
+      app.updateMyBookPage()
       wx.navigateBack({
         delta: 1
       })

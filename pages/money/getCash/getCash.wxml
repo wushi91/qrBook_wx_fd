@@ -3,13 +3,15 @@
   <text class='font-tip'>提现金额</text>
   <view class='input-wrapper'>
 
-  <input type='digit' 
-          maxlength='8'
+  <input type='number' 
+          maxlength='5'
           bindinput='bindMoneyInput'></input>
   </view>
   
   <view class='line'></view>
-  <text class='cash-tip font-tip'>20,000</text>
+
+  <text class='cash-tip font-tip' wx:if='{{errorTip?false:true}}'>可提现金额 ¥{{balance}}</text>
+  <text class='cash-tip font-tip error-tip' wx:else>{{errorTip}}</text>
 </view>
 
-<button class='main-button' bindtap='toGetCashOut'>确认提现</button>
+<button class='main-button {{errorTip?"disabled":""}}' bindtap='toGetCashOut' disabled='{{errorTip?true:false}}'>确认提现</button>

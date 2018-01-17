@@ -10,11 +10,45 @@
   </view>
 </view>
 
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[0].prop}}'>
+  <view class='bill-item' bindtap='toUnpayBillDetailPage'  wx:for="{{allBillList}}" wx:key >
+      <view>
+        <text class='font-list-item'>{{item.address}}</text>
+        <text class='font-red-money'>{{item.rent}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>{{item.start_time}}-{{item.end_time}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>交租日期：{{item.pay_time}}号</text>
+        <text wx:if='{{item.settle==="是"}}'  class='font-list-item-gray'>已结清</text>
+        <text wx:else class='font-list-item-red'>未结清</text>
+      </view>
+    </view>
+</view>
 
-<view class='list-wrapper'>
-  <view class='month-item'>
-    <text class='month-title font-tip'>12月</text>
-    <view class='bill-item' bindtap='toUnpayBillDetailPage'>
+
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[1].prop}}'>
+  <view class='bill-item' bindtap='toUnpayBillDetailPage'  wx:for="{{unpayBillList}}" wx:key >
+      <view>
+        <text class='font-list-item'>{{item.address}}</text>
+        <text class='font-red-money'>{{item.rent}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>{{item.start_time}}-{{item.end_time}}</text>
+      </view>
+      <view>
+        <text class='font-list-item-gray'>交租日期：{{item.pay_time}}号</text>
+        <text wx:if='{{item.settle==="是"}}'  class='font-list-item-gray'>已结清</text>
+        <text wx:else class='font-list-item-red'>未结清</text>
+      </view>
+    </view>
+</view>
+
+
+
+<view class='list-wrapper' wx-if='{{currentStatus===tab_status[2].prop}}'>
+  <view class='bill-item' bindtap='toUnpayBillDetailPage' wx:for="{{haspayBillList}}" wx:key>
       <view>
         <text class='font-list-item'>都市名园D栋26G</text>
         <text class='font-red-money'>5000</text>
@@ -27,6 +61,12 @@
         <text class='font-list-item-red'>未结清</text>
       </view>
     </view>
+</view>
+
+<!-- <view class='list-wrapper'>
+  <view class='month-item'>
+    <text class='month-title font-tip'>12月</text>
+    
     <view class='bill-item'>
       <view>
         <text class='font-list-item'>都市名园D栋26G</text>
@@ -129,4 +169,4 @@
   </view>
 
 
-</view>
+</view> -->

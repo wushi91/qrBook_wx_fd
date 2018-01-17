@@ -30,6 +30,7 @@ const wxGet = function (url, data, code200, error) {
     url: url,
     data: data,
     success: res => {
+      wx.stopPullDownRefresh() //停止下拉刷新
       if (res.data.msg === '0') {
         code200(res)
       } else {
@@ -42,6 +43,7 @@ const wxGet = function (url, data, code200, error) {
       }
     },
     fail: res => {
+      wx.stopPullDownRefresh() //停止下拉刷新
       if (error) {
         error(res)
       } else {
@@ -55,6 +57,11 @@ const wxGet = function (url, data, code200, error) {
 const getFormateDate = function (time) {
   let date = new Date(time)
   return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+}
+
+const getFormateDateWithTime = function (time) {
+  let date = new Date(time)
+  return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
 }
 
 
@@ -111,6 +118,7 @@ module.exports = {
   generaRentLengthArray,
   generaPayDayArray,
   getNextMonth,
+  getFormateDateWithTime
 }
 
 

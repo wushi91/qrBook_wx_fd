@@ -1,16 +1,50 @@
 // pages/record/record.js
+
+const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    allRecordist: [],
   },
 
+  getAllRecord:function(userId){
+    request.requestAllRecordList(userId,res=>{
+      console.log(res.data)
+      let allRecordist = []
+      if (res.data.list){
+        allRecordist = allRecordist.concat(res.data.list)
+      }
+      if (res.data.tixian) {
+        allRecordist =  allRecordist.concat(res.data.tixian)
+      }
+      console.log(allRecordist)
+      for (let i = 0; i < allRecordist.length; i++) {
+        let item = allRecordist[i]
+        item.trading_time = util.getFormateDateWithTime(item.trading_time)
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time)
+      }
+
+
+      
+      this.setData({
+        allRecordist: allRecordist
+      })
+
+    },res=>{
+      console.log(res)
+    })
+  },
   //收租详情
   toRentDetailPage: function (e) {
+    
     let payId = e.currentTarget.dataset.payId
+
     let recordType = e.currentTarget.dataset.recordType
     wx.navigateTo({
       url: '/pages/beanDetail/beanDetail?type=rent_detail&recordType=' + recordType + '&payId=' + payId
@@ -19,6 +53,7 @@ Page({
   //提现详情
   toGetCashDetailPage: function (e) {
     let payId = e.currentTarget.dataset.payId
+    console.log(payId)
     let recordType = e.currentTarget.dataset.recordType
     wx.navigateTo({
       url: '/pages/beanDetail/beanDetail?type=get_cash_detail&recordType=' + recordType + '&payId=' + payId
@@ -31,7 +66,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      return
+    }
+    this.getAllRecord(userId)
   },
 
   /**

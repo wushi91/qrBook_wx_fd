@@ -28,8 +28,12 @@ input{
   margin-top: 20rpx;
 }
 
-.cash-tip::before {
-  content: '可提现金额 ¥';
+/* .cash-tip::before {
+  content: '';
+} */
+
+.font-tip.error-tip{
+  color:rgba(242,73,73,1);
 }
 
 button{

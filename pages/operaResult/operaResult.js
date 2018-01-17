@@ -12,6 +12,7 @@ Page({
       get_cash_fail: '提现失败',
     },
     operaType: 'get_cash_fail',
+    cash:''
   },
 
 
@@ -25,7 +26,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      operaType: options.operaType
+      operaType: options.operaType,
+      cash: options.cash
     })
     wx.setNavigationBarTitle({
       title: this.data.operaTypes[this.data.operaType]

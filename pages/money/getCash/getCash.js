@@ -9,13 +9,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputMoney:''
+    balance:'',
+    inputMoney:'',
+    errorTip:''
   },
-
+  
   bindMoneyInput: function (e) {
     this.setData({
       inputMoney: e.detail.value
     })
+
+    if (e.detail.value>this.data.balance){
+      this.setData({
+        errorTip:'输入金额超过可提现金额'
+      })
+    }else{
+      this.setData({
+        errorTip: ''
+      })
+    }
   },
 
   toGetCashOut:function(){
@@ -25,9 +37,14 @@ Page({
       //未登录
       return
     }
-    request.requestGetCashOut(userId, 1, res=>{
-      console.log('000---000')
-      console.log(res)
+
+    let cash = this.data.inputMoney
+    request.requestGetCashOut(userId, cash, res=>{
+      wx.redirectTo({
+        url: "/pages/operaResult/operaResult?operaType=get_cash_success" + "&cash=" + cash,
+      })
+    },res=>{
+      console.log(res.data.msg)
     })
   },
 
@@ -35,7 +52,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      return
+    }
+    request.requestMyAccountDetail(userId, res => {
+      console.log(res)
+      console.log(res.data.list[0].money)
+      if (res.data.list[0].money>20000){
+        this.setData({
+          balance: 20000
+        })
+      }else{
+        this.setData({
+          balance: res.data.list[0].money
+        })
+      }
+      
+    })
   },
 
   /**

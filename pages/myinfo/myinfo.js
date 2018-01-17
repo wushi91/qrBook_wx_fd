@@ -1,5 +1,5 @@
 // pages/myinfo/myinfo.js
-
+const app = getApp()
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
 
@@ -61,6 +61,8 @@ Page({
         username: userInfo.nickName,
         headerimagesrc: userInfo.avatarUrl,
       })
+      app.updateMyBookPage()
+      app.updateMyIndexPage()
     })
   },
 
