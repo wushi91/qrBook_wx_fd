@@ -1,27 +1,18 @@
 {
   "pages": [
-    "pages/renter/addRenter/addRenter",
     "pages/index/index",
+    "pages/book/addRoom/addRoom",
+    "pages/renter/addRenter/addRenter",
     "pages/money/money",
     "pages/money/getCash/getCash",
     "pages/book/book",
     "pages/record/record",
     "pages/bill/bill",
-    
-    
-    
     "pages/myinfo/myinfo",
-    
     "pages/renter/renterDetail/renterDetail",
-    
-    "pages/book/addRoom/addRoom",
     "pages/operaResult/operaResult",
     "pages/myinfo/bindPhone/bindPhone",
     "pages/beanDetail/beanDetail"
-    
-    
-    
-    
     
   ],
   "window": {

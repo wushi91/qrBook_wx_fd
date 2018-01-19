@@ -23,24 +23,52 @@ Page({
     yaJinMoney: '',
     rentMoney: '',
 
-    
-
-
-    rentLengthArrayIndex: 11,//默认为6个月
+    rentLengthArrayIndex: 11,//默认为12个月
     payDayArrayIndex: new Date().getDate() - 1,//默认为当天号
     payWayArrayIndex: 0,//默认为1月1付
 
-    rentLengthArray: util.generaRentLengthArray(),//1月到24月
-    payDayArray: util.generaPayDayArray(),//1号到31号
+    rentLengthArray: util.generaRentLengthArray(''),//1月到24月
+    payDayArray: util.generaPayDayArray(''),//1号到31号
     payWayArray: [1, 2, 3, 4, 5, 6, 12],//1月1付
-   
+
+    //彻底晕，这里是为了弹出框设置单位
+    rentLengthArrayToWxss: util.generaRentLengthArray('个月'),//1月到24月
+    payDayArrayToWxss: util.generaPayDayArray('号'),//1号到31号
+    payWayArrayToWxss: ['1月/付', '2月/付', '3月/付', '4月/付', '5月/付', '6月/付', '12月/付'],//1月1付
     
+    //这个为了显示138 2233 4445 这样的手机号码
+    mabiLength:11,
   },
 
-  bindconfirm:function(){
-    console.log('000000000000')
-  },
+  clearKongge:function(){
+    console.log('clearKongge')
 
+    let renterPhone = this.data.renterPhone.split(' ').join('')
+    console.log(renterPhone)
+    this.setData({
+      mabiLength:11,
+      renterPhone: renterPhone
+    })
+
+  },
+  regularPhone:function(e){
+    console.log(e.detail.value)
+    console.log('regularPhone')
+    let renterPhone = e.detail.value
+
+    if (renterPhone.length<3){
+      return
+    }
+    let mabi = renterPhone.split('')
+    mabi.splice(3,0,' ')
+    mabi.splice(8, 0, ' ')
+    renterPhone = mabi.join('')
+    this.setData({
+      mabiLength: 13,
+      renterPhone: renterPhone
+    })
+  },
+  
   bindRenterNameInput: function (e) {
     this.setData({
       renterName: e.detail.value
@@ -66,33 +94,56 @@ Page({
     this.setData({
       rentStartDate: e.detail.value
     })
+
+    
   },
   //租期时长
   bindRentLengthChange: function (e) {
     this.setData({
       rentLengthArrayIndex: e.detail.value
     })
+    console.log(e)
+
+
+    this.setData({
+      rentLength: this.data.rentLengthArray[e.detail.value],
+    })
+    
   },
   //交租方式
   bindPayWayChange: function (e) {
     this.setData({
       payWayArrayIndex: e.detail.value
     })
+
+    this.setData({
+      rentPayWay: this.data.payWayArray[e.detail.value],
+    })   
+    
   },
   //交租日期
   bindPayDayChange: function (e) {
     this.setData({
       payDayArrayIndex: e.detail.value
     })
+
+    this.setData({
+      rentPayDate: this.data.payDayArray[e.detail.value],
+    })
   },
 
   toAddRenter:function(){
-    let rentOverDate = util.getNextMonth(new Date(this.data.rentStartDate), this.data.rentLengthArray[this.data.rentLengthArrayIndex])
-    console.log(rentOverDate)
-
+    let rentOverDate = util.getNextMonth(new Date(this.data.rentStartDate), parseInt(this.data.rentLengthArray[this.data.rentLengthArrayIndex]) )
+    console.log('起租日期-------------------')
+    console.log(this.data.rentStartDate)
+    console.log('-------------------')
+    console.log(this.data.rentLengthArray[this.data.rentLengthArrayIndex]+'个月以后')
+    console.log('截止日期-------------------')
+    console.log(rentOverDate.getFullYear() + '-' + (rentOverDate.getMonth() + 1) + '-' + rentOverDate.getDate())
+    
     let renterDetail = {
       renterName: this.data.renterName,
-      renterPhone: this.data.renterPhone,
+      renterPhone: this.data.renterPhone.split(' ').join(''),
       rentStartDate: this.data.rentStartDate,
       rentLength: this.data.rentLengthArray[this.data.rentLengthArrayIndex],
     
@@ -102,6 +153,8 @@ Page({
       rentMoney: this.data.rentMoney,
       rentOverDate: rentOverDate.getFullYear() + '-' + (rentOverDate.getMonth() + 1) + '-' + rentOverDate.getDate(),
     }
+
+    console.log(renterDetail)
     let userId = util.getMyUserId()
     request.requestToAddRenter(userId,this.data.houseid, renterDetail, res=>{
       app.updateMyBookPage()

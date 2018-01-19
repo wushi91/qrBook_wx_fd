@@ -1,5 +1,6 @@
 // pages/index/index.js
 
+const app = getApp()
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
 
@@ -16,6 +17,13 @@ Page({
   },
 
   toAddRoomPage:function(){
+
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      this.toMyUserLogin()
+      return
+    }
     wx.navigateTo({
       url: "/pages/book/addRoom/addRoom"
     })
@@ -33,6 +41,62 @@ Page({
   toRecordPage: function () {
     wx.navigateTo({
       url: "/pages/record/record"
+    })
+  },
+  toMyUserLogin: function () {
+    if (!util.getMyUserId()) {
+      //请求权限，获取微信用户信息
+      this.getWxUserInfo()
+        .then(userInfo => {
+          return this.getWxCode(userInfo)
+        })
+        .then(data => {
+          this.toGetMyUserId(data.code, data.userInfo)
+        })
+    }
+  },
+
+  getWxUserInfo: function () {
+    console.log('获取授权')
+    return new Promise(function (resolve, reject) {
+      wx.getUserInfo({
+        success: res => {
+          let userInfo = res.userInfo
+          resolve(userInfo)
+        }
+      })
+    })
+  },
+
+  getWxCode: function (userInfo) {
+    console.log('获取登陆code')
+    return new Promise(function (resolve, reject) {
+      wx.login({
+        success: res => {
+          let code = res.code
+          resolve({ code, userInfo })
+        }
+      })
+    })
+  },
+
+  toGetMyUserId: function (code, userInfo) {
+    //获取平台的userId
+    console.log('获取平台的userId')
+    request.requestLoginTogetMyUserId(code, userInfo, (res) => {
+      util.saveMyUserId(res.data.user_id)
+      console.log('userId：' + res.data.user_id)
+      this.setData({
+        username: userInfo.nickName,
+        headerimagesrc: userInfo.avatarUrl,
+      })
+      app.updateMyBookPage()
+      // app.updateMyIndexPage()
+
+      wx.navigateTo({
+        url: "/pages/book/addRoom/addRoom"
+      })
+      
     })
   },
   /**

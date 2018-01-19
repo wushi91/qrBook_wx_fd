@@ -63,6 +63,14 @@ Page({
       
       let renterDetail = res.data.list
       console.log(renterDetail)
+
+      let renterPhone = renterDetail.phone
+      let mabi = renterPhone.split('')
+      mabi.splice(3, 0, ' ')
+      mabi.splice(8, 0, ' ')
+      renterPhone = mabi.join('')
+      renterDetail.phone = renterPhone
+
       renterDetail.address = renterDetail.houselist.address
       renterDetail.end_time = util.getFormateDate(renterDetail.end_time)
       renterDetail.start_time = util.getFormateDate(renterDetail.start_time)

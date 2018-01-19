@@ -11,7 +11,7 @@ Page({
   data: {
     types: 
       {bill_detail_haspay:'账单详情',
-        bill_detail_nopay: '账单详情' ,
+        bill_detail_nopay: '账单详情',
        rent_detail: '收租详情' ,
        get_cash_detail: '提现详情' ,
        outdate_detail: '逾期详情'} ,
@@ -20,6 +20,7 @@ Page({
     outdateDetail:null,
     rentDetail:null,
     getCashDetail: null,
+    billDetail:null,
     payId:'',
   },
 
@@ -54,6 +55,22 @@ Page({
       })
     }, res => {
       console.log(res.data)
+    })
+  },
+
+  getBillDetail(userId, billId){
+    request.requestBillDetail(userId, billId,res=>{
+      console.log(res)
+
+      let billDetail = res.data.list[0]
+      billDetail.start_time = util.getFormateDate(billDetail.start_time)
+      billDetail.end_time = util.getFormateDate(billDetail.end_time)
+      this.setData({
+        address: res.data.list[0].address,
+        billDetail: billDetail
+      })
+    }, res => {
+      console.log(res)
     })
   },
   /**
@@ -102,6 +119,22 @@ Page({
       let userId = util.getMyUserId()
       this.getGetCashDetail(userId,options.payId)
     }
+
+
+    if (options.type === 'bill_detail_haspay' || options.type === 'bill_detail_nopay') {
+      console.log('getBillDetail')
+      this.setData({
+        billId: options.billId,
+      })
+      let userId = util.getMyUserId()
+      this.getBillDetail(userId, options.billId)
+    }
+    
+
+    // if(){
+    //   bill_detail_haspay: '账单详情',
+    //     bill_detail_nopay: '账单详情',
+    // }
     
   },
 

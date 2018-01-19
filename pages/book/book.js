@@ -196,8 +196,8 @@ Page({
 
 
     wx.showModal({
-      title: '确定删除房间' + address,
-      content: '',
+      title: '确定删除账本' ,
+      content: '确定删除账本' + address+'？',
       cancelText: '确定',
       cancelColor: '#F24949',
       confirmText: '取消',

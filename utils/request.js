@@ -1,8 +1,8 @@
 const util = require('../utils/util.js')
 
-const host = 'http://192.168.2.119:8080'
+// const host = 'http://192.168.2.119:8080'
 // const host = 'http://192.168.2.221:8080'//测试用
-// const host = 'https://www.0755qr.com'
+const host = 'https://www.0755qr.com'
 
 //登录
 const login_get_user_id_url = host +'/rentBook/authorization/landlord.do'
@@ -241,6 +241,20 @@ const requestRenterRecordList = function (phone,name, code200, error) {
 }
 
 
+const requestBaiduAddress = function(lb,success){
+  let ak = 'It0GdmpH8Rl8P8oUNwqSUi4ZKOIuGKlA'//需要个人申请
+  let url = 'https://api.map.baidu.com/geocoder/v2/?ak=' + ak+'&location=' + lb.latitude + ',' + lb.longitude + '&output=json&coordtype=wgs84ll'
+
+  wx.request({
+    url: url,
+    success: success,
+    fail: res => {
+      console.log(res)
+    }
+  })
+}
+
+
 module.exports = {
   requestLoginTogetMyUserId: requestLoginTogetMyUserId,
   requestCurrentMonthTotalMoney,
@@ -261,5 +275,7 @@ module.exports = {
   requestRecordDetail,
   requestToDeleteRenter,
   requestRenterRecordList,
-  requestToDeleteRoom
+  requestToDeleteRoom,
+  requestBaiduAddress,
+  requestBillDetail
 }

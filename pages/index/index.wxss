@@ -49,6 +49,7 @@
   text-overflow: ellipsis;
 }
 .top-wrapper .item-wrapper .item .item-money::before{
+  margin-left: -5rpx;
   content: "￥"
 }
 

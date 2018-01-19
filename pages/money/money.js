@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    balance:'',
+    balance:0,
   },
 
   toGetCashPage:function(){

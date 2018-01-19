@@ -3,6 +3,11 @@
 
 
 <view class='list-wrapper'>
+
+ <view wx:if='{{allRecordist===null||allRecordist.length===0}}'>
+    <text class='blank-title'>没有交易记录</text>
+  </view>
+  <view wx:else>
   <view class='record-item-wrapper' wx:for="{{allRecordist}}" wx:key>
     <view class='record-item' bindtap='toRentDetailPage'  wx:if='{{item.abstracts==="收租"}}' data-pay-id='{{item.pay_id}}'>
       <view>
@@ -24,6 +29,7 @@
       </view>
     </view>
     <view class='line' wx:if="{{index <allRecordist.length-1}}"></view>
+  </view>
   </view>
   
 </view>

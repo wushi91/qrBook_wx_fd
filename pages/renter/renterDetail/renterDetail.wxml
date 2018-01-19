@@ -75,6 +75,11 @@
 
 
 <view class='list-wrapper' wx-if='{{currentStatus===tab_status[1].prop}}'>
+
+<view wx:if='{{renterRecordList===null||renterRecordList.length===0}}'>
+    <text class='blank-title'>没有交易记录</text>
+  </view>
+  <view wx:else>
   <view class='record-item' wx:for="{{renterRecordList}}" wx:key bindtap='toRentDetailPage'  data-pay-id='{{item.pay_id}}'>
     <view>
       <text>{{item.title}}</text>
@@ -83,4 +88,5 @@
     <text class='font-list-item-gray'>{{item.trading_time}}</text>
  
   </view>
+</view>
 </view>

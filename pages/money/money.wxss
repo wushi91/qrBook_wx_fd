@@ -22,17 +22,13 @@ image{
   content: "￥"
 }
 
-button{
+.main-button{
   margin-top: 90rpx;
+  margin-bottom: 10rpx;
 }
 
 .cash-tip{
   margin-top: 30rpx;
   font-size:24rpx;
   color:rgba(127,131,137,1);
-  line-height:33rpx;
-}
-.cash-tip::after{
-  content: '2万/2万';
-  color: #EC3039;
 }

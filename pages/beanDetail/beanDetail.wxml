@@ -3,31 +3,31 @@
   <text class='title'>{{address}}</text>
 </view>
 
-<!--租房详情  -->
+<!--账单详情  -->
 <view class='item-wrapper' wx:if='{{type==="bill_detail_nopay"||type==="bill_detail_haspay"}}'>
   <view class='item'>
     <text class='font-item-gray30'>账单金额</text>
-    <text class='{{type==="bill_detail_nopay"?"font-red-money":"font-black-money"}}'>5000</text>
+    <text class='{{type==="bill_detail_nopay"?"font-red-money":"font-black-money"}}'>{{billDetail.rent}}</text>
   </view>
   <view class='line'></view>
   <view class='item'>
     <text class='font-item-gray30'>租客姓名</text>
-    <text class='font-item-gray30'>王大雷</text>
+    <text class='font-item-gray30'>{{billDetail.name}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>手机号码</text>
-    <text class='font-item-gray30'>135 0874 9762</text>
+    <text class='font-item-gray30'>{{billDetail.phone}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>租金时间</text>
-    <text class='font-item-gray30'>2017/12/01 - 2017/12/30</text>
+    <text class='font-item-gray30'>{{billDetail.start_time}}-{{billDetail.end_time}}</text>
   </view>
 
   <view class='item'>
     <text class='font-item-gray30'>交租日期</text>
-    <text class='font-item-gray30'>30号</text>
+    <text class='font-item-gray30'>{{billDetail.pay_time}}号</text>
   </view>
 
   <view class='item'>

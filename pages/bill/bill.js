@@ -101,14 +101,17 @@ Page({
   },
 
   toUnpayBillDetailPage: function (e) {
-    let billId = e.currentTarget.dataset.billId
+    let billId = e.currentTarget.dataset.billid
+    console.log('billId = ' + billId)
     wx.navigateTo({
       url: '/pages/beanDetail/beanDetail?type=bill_detail_nopay&billId=' + billId
     })
   },
 
   toHaspayBillDetailPage: function (e) {
-    let billId = e.currentTarget.dataset.billId
+
+    let billId = e.currentTarget.dataset.billid
+    console.log('billId = ' + billId)
     wx.navigateTo({
       url: '/pages/beanDetail/beanDetail?type=bill_detail_haspay&billId=' + billId
     })

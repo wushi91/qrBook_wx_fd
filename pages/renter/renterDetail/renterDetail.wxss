@@ -61,3 +61,12 @@
   display: block;
 }
 
+.blank-title{
+  width: 100%;
+  margin-top: 346rpx;
+  display: inline-block;
+  text-align: center;
+  font-size:34rpx;
+  color:rgba(127,131,137,1);
+  line-height:48rpx;
+}

@@ -14,4 +14,4 @@
   <text class='cash-tip font-tip error-tip' wx:else>{{errorTip}}</text>
 </view>
 
-<button class='main-button {{errorTip?"disabled":""}}' bindtap='toGetCashOut' disabled='{{errorTip?true:false}}'>确认提现</button>
+<button class='main-button {{errorTip||!inputMoney?"disabled":""}}' bindtap='toGetCashOut' disabled='{{errorTip||!inputMoney?true:false}}'>确认提现</button>

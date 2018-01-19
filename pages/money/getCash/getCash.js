@@ -31,6 +31,7 @@ Page({
   },
 
   toGetCashOut:function(){
+    
     console.log(this.data.inputMoney)
     let userId = util.getMyUserId()
     if (!userId) {
@@ -45,6 +46,10 @@ Page({
       })
     },res=>{
       console.log(res.data.msg)
+      wx.redirectTo({
+        url: "/pages/operaResult/operaResult?operaType=get_cash_fail",
+      })
+      
     })
   },
 

@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: ['广东省', '深圳市', '罗湖区'],
+    region: [],
     inputHouseName: ''
   },
 
@@ -25,12 +25,18 @@ Page({
       inputHouseName: e.detail.value
     })
   },
+
   toAddRoom: function () {
+    
+
+    util.saveBookAddress(this.data.region)
     let userId = util.getMyUserId()
     if (!userId) {
       //未登录
       return
     }
+
+
     request.requestToAddRoom(userId, this.data.region[0], this.data.region[1], this.data.inputHouseName,res=>{
       console.log(res)
       app.updateMyBookPage()
@@ -40,14 +46,56 @@ Page({
       wx.switchTab({
         url: '/pages/book/book'
       })
+    },res=>{
+      console.log(res)
+      this.roomHasSameTips()
     })
-    
+  },
+
+
+  roomHasSameTips: function () {
+    wx.showModal({
+      title: '该房源已存在，请输入其他房源信息',
+      content: '',
+      showCancel: false,
+      confirmText: '知道了',
+      confirmColor: '#2E8AE6',
+    })
+  },
+
+  toGetLocationByWxGPS:function(){
+    wx.getLocation({
+      success: res => {
+        let lb = res
+        request.requestBaiduAddress(lb, res => {
+          let address = res.data.result.addressComponent
+          let province = address.province
+          let city = address.city
+          let district = address.district
+          this.setData({
+            region: [province, city, district],
+          })
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
+    let bookAddress = util.getBookAddress()
+    if (bookAddress) {
+      //这个是之前不保存的地址
+      this.setData({
+        region: bookAddress,
+      })
+    }else{
+      this.toGetLocationByWxGPS()
+    }
+
+
+    
   },
 
   /**

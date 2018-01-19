@@ -23,6 +23,14 @@ const saveMyUserId = function (user_id) {
   wx.setStorageSync('user_id', user_id)
 }
 
+const getBookAddress = function () {
+  return wx.getStorageSync('bookAddress') || ''
+}
+
+const saveBookAddress = function (bookAddress) {
+  wx.setStorageSync('bookAddress', bookAddress)
+}
+
 
 //基础封装
 const wxGet = function (url, data, code200, error) {
@@ -44,6 +52,11 @@ const wxGet = function (url, data, code200, error) {
     },
     fail: res => {
       wx.stopPullDownRefresh() //停止下拉刷新
+      wx.showToast({
+        title:'网络出现问题，请稍候重试',
+        icon:'none',
+        mask:true,
+      })
       if (error) {
         error(res)
       } else {
@@ -56,29 +69,39 @@ const wxGet = function (url, data, code200, error) {
 
 const getFormateDate = function (time) {
   let date = new Date(time)
-  return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return [year, month, day].map(formatNumber).join('/')
 }
 
 const getFormateDateWithTime = function (time) {
   let date = new Date(time)
-  return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 
 //生成租期时长
-const generaRentLengthArray = function() {
+const generaRentLengthArray = function(tip) {
   let rentLengthArray = []
   for (let i = 1; i <= 24; i++) {
-    rentLengthArray.push(i)
+    rentLengthArray.push(i+tip)
   }
   return rentLengthArray;
 }
 
 //生成租期时长
-const generaPayDayArray = function () {
+const generaPayDayArray = function (tip) {
   let payDayArray = []
   for (let i = 1; i <= 31; i++) {
-    payDayArray.push(i)
+    payDayArray.push(i + tip)
   }
   return payDayArray;
 }
@@ -118,7 +141,9 @@ module.exports = {
   generaRentLengthArray,
   generaPayDayArray,
   getNextMonth,
-  getFormateDateWithTime
+  getFormateDateWithTime,
+  getBookAddress,
+  saveBookAddress
 }
 
 

@@ -1,11 +1,6 @@
 <!--pages/book/book.wxml-->
 
-<view wx:if='{{allBookList===null||allBookList.length===0}}' class='has-no-book'>
-    <image class='bill-blank-image' src="/images/icon-home-default.png"></image>
-    <text>你还没有新建账本</text>
-</view>
 
-<view wx:else>
 <view  class='tob-tab'>
   <view wx:for="{{tab_status}}"  wx:key
         class='tob-tab-item {{currentStatus===tab_status[index].prop?"tob-tab-item-select":""}}' 
@@ -16,6 +11,13 @@
 </view>
 
 <view class='list-wrapper' wx-if='{{currentStatus===tab_status[0].prop}}'>
+
+<view wx:if='{{allBookList===null||allBookList.length===0}}' class='has-no-book'>
+    <image class='bill-blank-image' src="/images/icon-home-default.png"></image>
+    <text>你还没有新建账本</text>
+</view>
+
+<view wx:else>
 <view class='item-wrapper {{moveHid===item.hid?"has-move":""}}' wx:for="{{allBookList}}" wx:key>
   <view class='book-item'  
         data-bookid="{{item.id}}" 
@@ -36,6 +38,7 @@
         bindtap='toDeleteRoom'>
       <text>删除</text>
   </view>
+</view>
 </view>
 </view>
 
@@ -78,5 +81,4 @@
     </view>
     </view>
   </view>
-</view>
 </view>
